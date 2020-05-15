@@ -1,0 +1,208 @@
+[colors]
+background = #434C5E
+background-alt = #3B4252
+foreground = #ECEFF4
+foreground-alt = #E5E9F0
+primary = #81A1C1
+secondary = #D08770
+alert = #BF616A
+
+[bar/breeze]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 32
+;offset-x = 1%
+;offset-y = 1%
+radius = 0
+fixed-center = false
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-size = 3
+iline-color = ${colors.primary}
+border-size = 0
+border-color = #000000
+padding-left = 3
+padding-right = 3
+module-margin-left = 1
+module-margin-right = 2
+font-0 = Noto Sans:pixelsize=14;3
+font-1 = FontAwesome5Free:style=Solid:size=14;3
+font-2 = FontAwesome5Free:style=Regular:size=14;3
+font-3 = FontAwesome5Brands:style=Regular:size=14;3
+modules-left = workspaces mpd
+modules-center = xwindow
+modules-right = pulseaudio date powermenu
+tray-position = right
+tray-padding = 4
+;tray-background = #0063ff
+wm-restack = i3
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:80:...%
+label-mode-foreground = ${colors.foreground}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /
+mount-1 = /media/data
+label-mounted = %{T2}💾%{T-}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted =
+;label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/workspaces]
+type = internal/i3
+pin-workspaces = false
+enable-click = true
+enable-scroll = true
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+
+ws-icon-default = 
+
+format = <label-state>
+label-mode-padding = 2
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.primary}
+
+label-focused = %icon% %name%
+label-focused-padding = 2
+label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+
+label-unfocused = %icon% %name%
+label-unfocused-padding = 2
+label-unfocused-foreground = ${colors.foreground-alt}
+
+label-visible = %icon% %name%
+label-visible-padding = 2
+label-visible-foreground = ${colors.foreground}
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+
+label-urgent = %icon% %name%
+label-urgent-padding = 2
+label-urgent-foreground = ${colors.foreground}
+label-urgent-background = ${colors.alert}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+label-mode-padding = 2
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.primary}
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 2
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+; Separator in between workspaces
+; label-separator = |
+
+[module/mpd]
+type = internal/mpd
+label-song = %artist% - %title%
+format-online = "%{F#D8DEE9}%{F-}  <label-song> <icon-prev> <icon-stop> <toggle> <icon-next>"
+format-offline = "%{F#D8DEE9}%{F-}  mpd offline"
+icon-prev = " %{F#D8DEE9}%{F-} "
+icon-stop = " %{F#D8DEE9}%{F-} "
+icon-play = " %{F#D8DEE9}%{F-} "
+icon-pause = " %{F#D8DEE9}%{F-} "
+icon-next = " %{F#D8DEE9}%{F-}  "
+label-song-maxlen = 75
+label-song-ellipsis = true
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.primary}
+label = CPU %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.primary}
+label = MEM %percentage_used%%
+
+[module/date]
+type = internal/date
+interval = 1
+date = " %d.%m.%Y"
+date-alt = " %a %d.%m.%Y"
+time = %H:%M
+time-alt = %H:%M:%S
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.primary}
+label = %date% %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume = "%{F#D8DEE9}%{F-}  <label-volume> <bar-volume>"
+label-volume = %percentage%%
+label-volume-foreground = ${root.foreground}
+label-muted =  muted
+label-muted-foreground = ${colors.foreground-alt}
+bar-volume-width = 4
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = 
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/text
+content = "%{F#BF616A}%{F-}"
+click-left = rofi-power
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
